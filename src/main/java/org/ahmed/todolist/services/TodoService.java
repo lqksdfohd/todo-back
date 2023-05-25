@@ -24,4 +24,9 @@ public class TodoService {
     public Todo sauvegarderUneTodo(Todo todo){
         return todoRepository.save(todo);
     }
+
+    public Optional<Todo> recupererUneTodo(int id){
+        Optional<Todo> optional = todoRepository.findById(id);
+        return optional;
+    }
 }
