@@ -57,4 +57,17 @@ public class TodoControlleurTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.titre", Matchers.is("todo valide")));
     }
+
+    @Test
+    public void testCompleterUneTodo_existante() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post("/completer-todo/{id}", 2))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.accompli", Matchers.is("TRUE")));
+    }
+
+    @Test
+    public void testCompleterUneTodo_nonExistante() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post("/completer-todo/{id}", 3))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }
