@@ -2,6 +2,7 @@ package org.ahmed.todolist.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.ahmed.todolist.entite.Accompli;
 
 import javax.validation.constraints.NotBlank;
 
@@ -12,4 +13,5 @@ public class TodoDTO {
     @NotBlank
     private String titre;
     private String description;
+    private Accompli accompli;
 }

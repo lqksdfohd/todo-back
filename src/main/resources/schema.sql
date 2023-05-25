@@ -6,7 +6,7 @@ create table if not exists todo(
     id integer not null primary key,
     titre varchar,
     description varchar(1000),
-    faite boolean
+    faite integer
 );
 
 create table if not exists id_table(

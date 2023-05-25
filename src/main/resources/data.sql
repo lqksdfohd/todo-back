@@ -1,2 +1,2 @@
-insert into todo(id, titre, description, faite) values(1, 'creer le projet todo', 'créer les scripts ddl et dml',true);
-insert into todo(id, titre, description, faite) values(2, 'tester le projet todo', 'faire les tests unitaires et d intégrations',false);
+insert into todo(id, titre, description, faite) values(1, 'creer le projet todo', 'créer les scripts ddl et dml',1);
+insert into todo(id, titre, description, faite) values(2, 'tester le projet todo', 'faire les tests unitaires et d intégrations',0);

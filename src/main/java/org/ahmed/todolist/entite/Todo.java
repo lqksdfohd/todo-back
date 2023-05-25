@@ -24,5 +24,26 @@ public class Todo {
     private String description;
 
     @Column(name = "FAITE")
-    private boolean faite;
+    private Integer faite;
+
+    @Transient
+    private Accompli accompli;
+
+    public void setAccompli(Accompli accompli){
+        if(accompli == Accompli.TRUE){
+            this.accompli = Accompli.TRUE;
+            this.faite = 1;
+        }else{
+            this.accompli = Accompli.FALSE;
+            this.faite = 0;
+        }
+    }
+    @PostLoad
+    public void miseEnPlaceApresChargement(){
+        if(faite == 1){
+            accompli = Accompli.TRUE;
+        }else{
+            accompli = Accompli.FALSE;
+        }
+    }
 }
