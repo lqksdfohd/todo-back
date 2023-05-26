@@ -25,7 +25,7 @@ public class TodoControlleur {
     @Autowired
     private MapstructService mapstructService;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/recuperer-toutes-les-todos")
     public List<TodoDTO> recupererToutesLesTodos(){
         List<Todo> liste = todoService.recupererListeDesTodos();
         List<TodoDTO> output = liste.stream().map(t -> mapstructService.todoVersTodoDTO(t))
