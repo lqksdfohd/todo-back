@@ -1,5 +1,6 @@
 package org.ahmed.todolist.controlleurs;
 
+import org.ahmed.todolist.dtos.TodoCeationDTO;
 import org.ahmed.todolist.dtos.TodoDTO;
 import org.ahmed.todolist.entite.Accompli;
 import org.ahmed.todolist.entite.Todo;
@@ -28,13 +29,14 @@ public class TodoControlleur {
     public List<TodoDTO> recupererToutesLesTodos(){
         List<Todo> liste = todoService.recupererListeDesTodos();
         List<TodoDTO> output = liste.stream().map(t -> mapstructService.todoVersTodoDTO(t))
+                .sorted((t1,t2) -> -(t1.getId() - t2.getId()))
                 .collect(Collectors.toList());
         return output;
     }
 
     @PostMapping("/creer-todo")
-    public TodoDTO creerUneTodo(@Valid @RequestBody TodoDTO dto){
-        Todo enInput = mapstructService.todoDTOVersTodo(dto);
+    public TodoDTO creerUneTodo(@Valid @RequestBody TodoCeationDTO dto){
+        Todo enInput = mapstructService.todoCreationDTOVersTodo(dto);
         enInput.setAccompli(Accompli.FALSE);
         Todo enOutput = todoService.sauvegarderUneTodo(enInput);
         TodoDTO output = mapstructService.todoVersTodoDTO(enOutput);
