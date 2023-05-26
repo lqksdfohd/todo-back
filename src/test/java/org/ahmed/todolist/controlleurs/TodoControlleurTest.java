@@ -67,7 +67,20 @@ public class TodoControlleurTest {
 
     @Test
     public void testCompleterUneTodo_nonExistante() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.post("/completer-todo/{id}", 3))
+        mockMvc.perform(MockMvcRequestBuilders.post("/completer-todo/{id}", -3))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void testRecupererTodoById_mauvaisId() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/recuperer-todo/{id}",-10))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void testRecupererTodoById_idCorrespondant() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/recuperer-todo/{id}", 1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.titre", Matchers.is("creer le projet todo")));
     }
 }

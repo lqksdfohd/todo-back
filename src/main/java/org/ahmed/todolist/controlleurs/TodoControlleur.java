@@ -53,4 +53,15 @@ public class TodoControlleur {
             return new ResponseEntity<>(enOutput, HttpStatus.OK);
         }
     }
+
+    @GetMapping(value = "/recuperer-todo/{id}")
+    public ResponseEntity<TodoDTO> recupererTodoById(@PathVariable("id") int id){
+        Optional<Todo> optional = todoService.recupererUneTodo(id);
+        if(optional.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            TodoDTO output = mapstructService.todoVersTodoDTO(optional.get());
+            return new ResponseEntity<>(output,HttpStatus.OK);
+        }
+    }
 }
